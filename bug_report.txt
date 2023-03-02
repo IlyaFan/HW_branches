@@ -1,0 +1,9 @@
+#: 		Bug report's number
+Title:		Bug report's title
+Steps:		Bug report's steps
+ExpectedResult:	Expected result
+ActualResult:	Actual result
+Severity:	Bug severity
+Priority:	Bug priority
+Environment:	Os, device
+Description:	Some description
