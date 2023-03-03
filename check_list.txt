@@ -1,0 +1,8 @@
+#		Checklist number
+Title		Checklist title
+Steps		Checklist steps
+ActualSesult	Actual result
+ExpectedResult	Expected Result
+Environment	Os, Device
+Comments	Another information
+Links		Bug report link
