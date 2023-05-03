@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "a6963cb8-7399-4414-833f-62a67973ffb8",
+		"name": "Postman_HW1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15171601"
+	},
+	"item": [
+		{
+			"name": "EP_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/get_method?name=my_name&age=my_age",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"get_method"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "my_name",
+							"description": "Not required"
+						},
+						{
+							"key": "age",
+							"value": "my_age",
+							"description": "Not required"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_2",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data; boundary=<calculated when request is sent>",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "my_name",
+							"description": "Not required",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "39",
+							"description": "Not required",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1200",
+							"description": "Required",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/user_info_3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/object_info_1?name=my_name&age=39&weight=83",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"object_info_1"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "my_name",
+							"description": "Not required"
+						},
+						{
+							"key": "age",
+							"value": "39",
+							"description": "Required"
+						},
+						{
+							"key": "weight",
+							"value": "83",
+							"description": "Required"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/object_info_2?name=my_name&age=39&salary=1200",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"object_info_2"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "my_name"
+						},
+						{
+							"key": "age",
+							"value": "39"
+						},
+						{
+							"key": "salary",
+							"value": "1200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/object_info_3?name=Illia&age=40&salary=2000",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Illia"
+						},
+						{
+							"key": "age",
+							"value": "40"
+						},
+						{
+							"key": "salary",
+							"value": "2000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_6",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/object_info_4?name=my_name&age=39&salary=1200",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "my_name"
+						},
+						{
+							"key": "age",
+							"value": "39"
+						},
+						{
+							"key": "salary",
+							"value": "1200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_7",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "my_name",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "39",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1200",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/user_info_2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
