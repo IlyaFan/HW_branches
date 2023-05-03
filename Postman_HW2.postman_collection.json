@@ -1,0 +1,439 @@
+{
+	"info": {
+		"_postman_id": "ab6b9800-6243-4eef-866e-996d2433bc16",
+		"name": "Postman_HW2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15171601"
+	},
+	"item": [
+		{
+			"name": "First",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseString = pm.response.text();            //gets response text\r",
+							"var responseCode = pm.response.code;                //gets response status code\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () { \r",
+							"    pm.response.to.have.status(200);                //assert if the status code is 200\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has certain string\", function() {\r",
+							"    pm.response.to.have.body(responseString);       //asserts if the request has certain string\r",
+							"})\r",
+							"\r",
+							"console.log(\"Request string is\", responseString);   //outputs the response string into console\r",
+							"console.log(\"Status code is\", responseCode);        //outputs the response status code "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/first",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"first"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_3",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();                                                      //gets the response body as a JSON\r",
+							"\r",
+							"var responseSalary = jsonData.salary;                                                   //gets the value of the salary key from response\r",
+							"\r",
+							"var requestName = pm.request.body.formdata.get(\"name\");                                 //gets the value of the name key from request form data body  \r",
+							"var requestAge = pm.request.body.formdata.get(\"age\");                                   //gets the value of the age key from request form data body\r",
+							"var requestSalary = +pm.request.body.formdata.get(\"salary\");                            //gets the value of the salary key from request form data body\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () { \r",
+							"    pm.response.to.have.status(200);                                                    //assert if the status code is 200\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Request name is equal to response name\", function () {                             \r",
+							"    pm.expect(jsonData.name).to.eql(requestName);                                       //assert if the name from request is equal to name from response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Request age is equal to response age\", function () {\r",
+							"    pm.expect(jsonData.age).to.eql(requestAge);                                         //assert if the age from request is equal to age from response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Request salary is equal to response salary\", function () {\r",
+							"    pm.expect(jsonData.salary).to.eql(requestSalary);                                   //assert if the salary from request is equal to salary from response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response salary throug 1,5 years is equal to request salary*4\", function () {\r",
+							"    pm.expect(jsonData.family.u_salary_1_5_year).to.eql(requestSalary*4);               //assert if the salary*4 from request is equal to lasary though 1,5 years from response\r",
+							"});\r",
+							"    \r",
+							"console.log(jsonData.family);                                                           //outputs the response into console"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Illia",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "39",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1200",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/user_info_3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "object_info_3",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();                                                      //gets the response body as a JSON\r",
+							"\r",
+							"var requestUrl = pm.request.url.query;                                                  //gets the request querry params\r",
+							"\r",
+							"var reqName = requestUrl.get(\"name\");                                                   //gets the request name value\r",
+							"var reqAge = requestUrl.get(\"age\");                                                     //gets the request age value\r",
+							"var reqSalary = requestUrl.get(\"salary\");                                               //gets the request salary value\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () { \r",
+							"    pm.response.to.have.status(200);                                                    //assert if the status code is 200\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Request name is equal to response name\", function () {                             \r",
+							"    pm.expect(jsonData.name).to.eql(jsonData.name);                                       //assert if the name from request is equal to name from response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Request age is equal to response age\", function () {\r",
+							"    pm.expect(jsonData.age).to.eql(jsonData.age);                                         //assert if the age from request is equal to age from response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Request salary is equal to response salary\", function () {\r",
+							"    pm.expect(jsonData.salary).to.eql(jsonData.salary);                                   //assert if the salary from request is equal to salary from response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Dog has name and age keys\", function () {\r",
+							"    pm.expect(jsonData.family.pets.dog).to.have.all.key(\"name\", \"age\");                   //assert if the dog from response has name and age property\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Dog's name is Lucky\", function () {\r",
+							"    pm.expect(jsonData.family.pets.dog.name).to.eql(\"Luky\")                               //assert if the dog from response has the name \"Luky\"\r",
+							"});\r",
+							"    \r",
+							"pm.test(\"Dog's age is 4\", function () {\r",
+							"    pm.expect(jsonData.family.pets.dog.age).to.eql(4)                                     //assert if the dog from response has the age \"4\"\r",
+							"});\r",
+							"\r",
+							"console.log(jsonData.family);                                                             //outputs the response into console"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/object_info_3?name=Illia&age=39&salary=1200",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Illia"
+						},
+						{
+							"key": "age",
+							"value": "39"
+						},
+						{
+							"key": "salary",
+							"value": "1200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "object_info_4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var resp = pm.response.json();                                                          //gets the response body as a JSON\r",
+							"\r",
+							"var req = pm.request.url.query;                                                         //gets the request querry params\r",
+							"\r",
+							"var reqName = req.get(\"name\");                                                          //gets the request querry param's name value\r",
+							"var reqAge = +req.get(\"age\");                                                           //gets the request querry param's age value\r",
+							"var reqSalary = +req.get(\"salary\")                                                      //gets the request querry param's salary value\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () { \r",
+							"    pm.response.to.have.status(200);                                                    //assert if the status code is 200\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Request name is equal to response name\", function () {\r",
+							"    pm.expect(resp.name).to.eql(reqName);                                               //assert if the name from the request is equal to name from the response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Request age is equal to response age\", function () {\r",
+							"    pm.expect(resp.age).to.eql(reqAge);                                                 //assert if the age from the request is equal to the age from the response\r",
+							"});\r",
+							"\r",
+							"console.log(\"Salary from request is \" + reqSalary);                                     //outputs the salary from the request into console\r",
+							"console.log(\"Salaries from response are \" + resp.salary);                               //outputs the salary from the response into console\r",
+							"\r",
+							"console.log(\"First value from request salary key is \", resp.salary[0])                  //outputs the first salary element from the response list into console\r",
+							"console.log(\"First value from request salary key is \", resp.salary[1])                  //outputs the second salary element from the response list into console\r",
+							"console.log(\"First value from request salary key is \", resp.salary[2])                  //outputs the third salary element from the response list into console\r",
+							"\r",
+							"pm.test(\"Check if the salary from request is equal to first element from salary response\", function () {\r",
+							"    pm.expect(reqSalary).to.eql(+resp.salary[0]);                                       //assert if the salary from the request is equal to the first element from the salary response\r",
+							"});reqSalary\r",
+							"\r",
+							"pm.test(\"Check if the salary*2 from request is equal to second element from salary respons\", function () {\r",
+							"    pm.expect(reqSalary*2).to.eql(+resp.salary[1]);                                     //assert if the salary*2 from the request is equal to the second element from the salary response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the salary*3 from request is equal to third element from salary respons\", function () {\r",
+							"    pm.expect(reqSalary*3).to.eql(+resp.salary[2]);                                     //assert if the salary*3 from the request is equal to the third element from the salary response\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"name\",reqName);                                                     //sets the request name param as the environmental varible name\r",
+							"pm.environment.set(\"age\", reqAge);                                                      //sets the request age param as the environmental varible age\r",
+							"pm.environment.set(\"salary\", reqSalary);                                                //sets the request salary param as the environmental varible salary\r",
+							"\r",
+							"for (i=0; i<resp.salary.length; i++) {\r",
+							"    console.log(\"The \" + [i+1] + \" value from request salary key is \"+resp.salary[i]);  //outputs all elements from the salary's response list into console\r",
+							"};"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/object_info_4?name=Illia&age=39&salary=1200",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Illia"
+						},
+						{
+							"key": "age",
+							"value": "39"
+						},
+						{
+							"key": "salary",
+							"value": "1200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();                                                      //gets the response body as a JSON\r",
+							"\r",
+							"var request = request.data;                                                             //gets the request data\r",
+							"\r",
+							"var req_name = pm.request.body.formdata.get(\"name\");                                    //gets the request name value\r",
+							"var req_age = +pm.request.body.formdata.get(\"age\");                                     //gets the request age value\r",
+							"var req_salary = +pm.request.body.formdata.get(\"salary\");                               //gets the request salary value\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () { \r",
+							"    pm.response.to.have.status(200);                                                    //assert if the status code is 200\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has [start_qa_salary] property\" , function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"start_qa_salary\");                            //assert if the response has [start_qa_salary] property\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has [qa_salary_after_6_months] property\" , function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"qa_salary_after_6_months\");                   //assert if the response has [qa_salary_after_6_months] property\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has [qa_salary_after_12_months] property\" , function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"qa_salary_after_12_months\");                  //assert if the response has [qa_salary_after_12_months] property\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has [qa_salary_after_1.5_year] property\" , function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"qa_salary_after_1.5_year\");                   //assert if the response has [qa_salary_after_1.5_year] property\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has [qa_salary_after_3.5_years] property\" , function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"qa_salary_after_3.5_years\");                  //assert if the response has [qa_salary_after_3.5_years] property] property\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has [person] property\" , function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"person\");                                     //assert if the response has [person] property]\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response [start_qa_salary] is equal to request salary\", function () {\r",
+							"    pm.expect(req_salary).to.eql(jsonData.start_qa_salary);                             //assert if the salary from the request is equal to [start_qa_salary] from the response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response [qa_salary_after_6_months] is equal to request salary*2\", function () {\r",
+							"    pm.expect(req_salary*2).to.eql(jsonData.qa_salary_after_6_months);                  //assert if the salary*2 from the request is equal to [qa_salary_after_6_months] from the response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response [qa_salary_after_12_months] is equal to request salary*2.7\", function () {\r",
+							"    pm.expect(req_salary*2.7).to.eql(jsonData.qa_salary_after_12_months);               //assert if the salary*2.7 from the request is equal to [qa_salary_after_12_months] from the response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response [qa_salary_after_1.5_year] is equal to request salary*3.3\", function () {\r",
+							"    pm.expect(req_salary*3.3).to.eql(jsonData[\"qa_salary_after_1.5_year\"]);             //assert if the salary*3.3 from the request is equal to [qa_salary_after_1.5_year] from the response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response [qa_salary_after_3.5_years] is equal to request salary*3.8\", function () {\r",
+							"    pm.expect(req_salary*3.8).to.eql(jsonData[\"qa_salary_after_3.5_years\"]);            //assert if the salary*3.8 from the request is equal to [qa_salary_after_3.5_years] from the response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response first element from person[u_name] is equal to request salary\", function () {\r",
+							"    pm.expect(req_salary).to.eql(jsonData.person.u_name[1]);                            //assert if the salary from the request is equal to first element from person[u_name] from the response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response [person.u_age] is equal to request age\", function () {\r",
+							"    pm.expect(req_age).to.eql(jsonData.person.u_age);                                   //assert if the age from the request is equal to [person.u_age] from the response\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response [u_salary_5_years] is equal to request salary*4.2\", function () {\r",
+							"    pm.expect(req_salary*4.2).to.eql(jsonData.person.u_salary_5_years);                 //assert if the salary*4.2 from the request is equal to [person.u_salary_5_years] from the response\r",
+							"});\r",
+							"\r",
+							"for (property in jsonData.person) {\r",
+							"    console.log(`${property}: ${jsonData.person[property]}`);                           //outputs all elements from the person's response list into console\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var envName = pm.environment.get(\"name\");       //gets the request name value\r",
+							"var envAge = pm.environment.get(\"age\");         //gets the request age value\r",
+							"var envSalary = pm.environment.get(\"salary\");   //gets the request salary value"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "{{age}}",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "{{salary}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/user_info_2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
