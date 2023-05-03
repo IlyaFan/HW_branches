@@ -1,6 +1,6 @@
-1. Send the request:
+*/1. Send the request:
 	- assert if the status code is 200
-	- asserts if the request has certain string
+	- asserts if the request has certain string*/
 	
 var responseString = pm.response.text();            //gets response text
 var responseCode = pm.response.code;                //gets response status code
