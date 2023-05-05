@@ -156,7 +156,7 @@ for (i=0; i<resp.salary.length; i++) {
     console.log("The " + [i+1] + " value from request salary key is "+resp.salary[i]);  //outputs all elements from the salary's response list into console
 };
 
-//4. Send the request:
+//5. Send the request:
 //	- check if the status code is 200
 //	- check if the response has [start_qa_salary] property
 //	- check if the response has [qa_salary_after_6_months] property
