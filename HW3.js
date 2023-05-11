@@ -165,11 +165,11 @@ schema = {                                                          //json schem
 }
 
 pm.test("Status code is 200", function () {                         
-    pm.response.to.have.status(200);                                                                    //assert if the status code is 200
+    pm.response.to.have.status(200);                        		//assert if the status code is 200
 });
 
 pm.test("Validate schema", function () {
-    pm.response.to.have.jsonSchema(schema);                                                             //validates the response schema                   
+    pm.response.to.have.jsonSchema(schema);                 		//validates the response schema                   
 });
 
 pm.test("The daily_food from the request is equal to weight from the response*0.012", function () {     //assert if the daily_food from the request is equal to weight from the response*0.012
@@ -235,11 +235,11 @@ schema = {                                                          //json schem
 }
 
 pm.test("Status code is 200", function () {                         
-    pm.response.to.have.status(200);                                                                //assert if the status code is 200
+    pm.response.to.have.status(200);                        		//assert if the status code is 200
 });
 
 pm.test("Validate schema", function () {
-    pm.response.to.have.jsonSchema(schema);                                                         //validates the response schema                    
+    pm.response.to.have.jsonSchema(schema);                    		//validates the response schema                    
 });
 
 pm.test("If the name from the response is equal to environmental variable [name]", function () {
@@ -251,4 +251,86 @@ pm.test("If the age from the response is equal to environmental variable [age]",
 });
 
 //6. Send the request:
-//	-          
+//	- set envoronmental variable using random Cur_ID value
+
+jsonData = pm.response.json();                                  	//gets the response body as a JSON
+var rand = Math.round(Math.random() * jsonData.length);         	//gets random number
+var cur_id = jsonData[rand].Cur_ID;                             	//gets random Cur_ID related to random number
+pm.environment.set("cur_id", cur_id);                           	//sets random Cur_ID as environmental variable cur_id for the next request (curr_byn)
+
+//7. Send the rquest:
+//	- send the request, using Cur_ID parameter from environment (from previous request)
+//	- check if the status code is 200
+//	- validate the response schema
+
+schema = {                                                        	//json schema to check the response
+    "required": [
+        "Cur_Abbreviation",
+        "Cur_ID",
+        "Cur_Name",
+        "Cur_OfficialRate",
+        "Cur_Scale",
+        "Date"
+    ],
+    "properties": {
+        "Cur_Abbreviation": {
+            "type": "string"
+        },
+        "Cur_ID": {
+            "type": "integer"
+        },
+        "Cur_Name": {
+            "type": "string"
+        },
+        "Cur_OfficialRate": {
+            "type": "number"
+        },
+        "Cur_Scale": {
+            "type": "integer"
+        },
+        "Date": {
+            "type": "string"
+        }
+    }
+}
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);                        		//assert if the status code is 200                
+});
+
+pm.test("Validate schema", function () {
+    pm.response.to.have.jsonSchema(schema);                    		//validates the response schema            
+});
+
+//8. Send the request:
+//	- gets each Cur_ID of the response list, sends request using each Cur_ID and checks if the response has [Cur_OfficialRate] property
+
+jsonData = pm.response.json();                                      //gets the response body as a JSON
+
+for (let i = 0; i < jsonData.length; i++)                           //gets each Cur_ID of the response list, sends request using each Cur_ID and checks if the response has [Cur_OfficialRate] property
+    {
+        pm.sendRequest(
+        {
+            url: 'http://54.157.99.22:80/curr_byn',
+            method: 'POST',
+            header: {'Content-Type' : 'multipart/form-data'},
+            body:
+            {
+                "mode": "formdata",
+                formdata: 
+                    [
+                    {key: "auth_token", value: pm.environment.get("token"), disabled: false, description: {content:"", type:"text/plain"}},
+                    {key: "curr_code", value: jsonData[i].Cur_ID, disabled: false, description: {content:"", type:"text/plain"}}
+                    ]
+            }, function(error, res)
+            {  
+                if (error)
+                {
+                    console.log(error);
+                } else if (hasOwnProperty('Cur_OfficialRate'))
+                {
+                    console.log(data)
+                }
+            }
+        });
+    }
