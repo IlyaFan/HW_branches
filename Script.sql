@@ -84,7 +84,6 @@
 		id serial primary key,
 		monthly_salary INT not NULL)
 	
-<<<<<<< HEAD
 /*4*/	insert into salary (monthly_salary)
 		values 	(1000),
 				(1100),
@@ -102,24 +101,3 @@
 				(2300),
 				(2400),
 				(2500)
-=======
-insert into salary (monthly_salary)
-values 	(1000),
-		(1100),
-		(1200),
-		(1300),
-		(1400),
-		(1500),
-		(1600),
-		(1700),
-		(1800),
-		(1900),
-		(2000),
-		(2100),
-		(2200),
-		(2300),
-		(2400),
-		(2500)
-		
-select * from salary
->>>>>>> 51cbed137cd61649dab2cf679bba448e5b8faab5
