@@ -1,12 +1,12 @@
 /* Tasks:	1. Create table employees
-  			2. Insert 70 resord into it*/
+  		2. Insert 70 resord into it*/
 
 /*1*/	create table employees(
 		id serial PRIMARY key,
 		employee_name varchar(50) NOT NULL)
 
 /*2*/	insert into employees (employee_name)
-		values 	('Ильинский Роман Русланович'),
+		values 		('Ильинский Роман Русланович'),
 				('Дмитриева Валерия Родионовна'),
 				('Матвеев Давид Михайлович'),
 				('Горбунов Платон Дмитриевич'),
